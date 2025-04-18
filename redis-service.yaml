@@ -1,0 +1,13 @@
+# redis-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-service # The name used by the app to connect (DNS name within cluster)
+spec:
+  selector:
+    app: redis # Selects Pods with the 'app: redis' label (from redis-deployment)
+  ports:
+    - protocol: TCP
+      port: 6379 # Port the service listens on
+      targetPort: 6379 # Port on the Pods to forward traffic to
+  type: ClusterIP # Only exposes the service on a cluster-internal IP

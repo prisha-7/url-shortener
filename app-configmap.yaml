@@ -1,0 +1,11 @@
+# app-configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+data:
+  # Example config value - maybe a base URL prefix if needed by the app
+  # We didn't use this in our app.py, but this shows how it's done
+  BASE_URL_PREFIX: "short"
+  REDIS_HOST: "redis-service"
+  REDIS_PORT: "6379"

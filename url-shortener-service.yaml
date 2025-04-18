@@ -1,0 +1,23 @@
+# url-shortener-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: url-shortener-service
+spec:
+  selector:
+    app: url-shortener # Selects Pods with 'app: url-shortener' label
+  ports:
+    - protocol: TCP
+      port: 80 # Port the service listens on externally
+      targetPort: 5000 # Port on the app Pods to forward traffic to (where Flask runs)
+  # Use LoadBalancer type if your cluster supports it (like Minikube, cloud providers)
+  # It provisions an external IP.
+  # If LoadBalancer is not available or you prefer, use NodePort.
+  type: LoadBalancer
+  # If using NodePort, uncomment below and comment out type: LoadBalancer
+  # type: NodePort
+  # ports:
+  #   - protocol: TCP
+  #     port: 80
+  #     targetPort: 5000
+  #     # nodePort: 30080 # Optional: specify a port in the NodePort range (e.g., 30000-32767)

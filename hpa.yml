@@ -1,0 +1,28 @@
+# hpa.yaml
+apiVersion: autoscaling/v2 # Use v2 for more features like scaling on memory
+kind: HorizontalPodAutoscaler
+metadata:
+  name: url-shortener-hpa
+spec:
+  scaleTargetRef: # Point to the Deployment to scale
+    apiVersion: apps/v1
+    kind: Deployment
+    name: url-shortener-deployment # Name of your app Deployment
+  minReplicas: 2 # Minimum number of pods
+  maxReplicas: 6 # Maximum number of pods
+  metrics:
+  - type: Resource # Scale based on CPU or Memory
+    resource:
+      name: cpu
+      target:
+        type: Utilization # Scale based on percentage of requested CPU
+        # Target 50% CPU utilization - if avg CPU across pods exceeds 50% of requested, scale up
+        averageUtilization: 50
+  # Optional: You could also add memory-based scaling
+  # - type: Resource
+  #   resource:
+  #     name: memory
+  #     target:
+  #       type: AverageValue # Target a specific average memory value (e.g., 200Mi)
+  #       # type: Utilization # Or target % of requested memory
+  #       averageValue: 200Mi

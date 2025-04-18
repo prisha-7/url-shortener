@@ -1,0 +1,3 @@
+# requirements.txt
+Flask==2.3.3 # Use a specific version or latest stable
+redis==5.0.1 # Add redis client

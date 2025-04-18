@@ -1,0 +1,22 @@
+# redis-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-deployment # The name of the Deployment
+  labels:
+    app: redis # Label used by the Service
+spec:
+  replicas: 1 # Run a single instance of Redis
+  selector:
+    matchLabels:
+      app: redis # Find Pods with this label
+  template:
+    metadata:
+      labels:
+        app: redis # Label applied to Pods created by this Deployment
+    spec:
+      containers:
+      - name: redis
+        image: redis:6-alpine # Use official Redis image (Alpine version is smaller)
+        ports:
+        - containerPort: 6379 # Default Redis port
